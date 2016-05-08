@@ -34,14 +34,28 @@ import org.bukkit.event.player.PlayerEvent;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
+/**
+ * Player-specific callback
+ * <p>
+ * <p>
+ * If the player involved in the event matches the callback's player, it is accepted and calls {@link #callPlayer(PlayerEvent)}, otherwise the listener waits until the player matches
+ *
+ * @param <T>
+ */
 public abstract class PlayerEventCallback<T extends PlayerEvent> implements EventCallback<T> {
 
 	private final UUID playerUUID;
 
+	/**
+	 * @param uuid UUID of the player
+	 */
 	public PlayerEventCallback(@Nonnull UUID uuid) {
 		this.playerUUID = uuid;
 	}
 
+	/**
+	 * @param player Player to listen for
+	 */
 	public PlayerEventCallback(@Nonnull Player player) {
 		this.playerUUID = player.getUniqueId();
 	}
@@ -55,5 +69,10 @@ public abstract class PlayerEventCallback<T extends PlayerEvent> implements Even
 		return false;
 	}
 
+	/**
+	 * Called when the player involved in the event matches
+	 *
+	 * @param event the event
+	 */
 	public abstract void callPlayer(T event);
 }

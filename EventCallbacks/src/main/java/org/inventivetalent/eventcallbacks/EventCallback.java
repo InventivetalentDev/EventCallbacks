@@ -30,8 +30,21 @@ package org.inventivetalent.eventcallbacks;
 
 import org.bukkit.event.Event;
 
+/**
+ * Basic callback for events
+ *
+ * @param <T> Event Type
+ */
 public interface EventCallback<T extends Event> {
 
+	/**
+	 * Called when the event occurs.
+	 * <p>
+	 * Returning <code>true</code> marks the event as "accepted" and the listener won't be called again.
+	 *
+	 * @param event the event
+	 * @return if <code>true</code> the event was accepted and the listener will be removed
+	 */
 	boolean call(T event);
 
 }

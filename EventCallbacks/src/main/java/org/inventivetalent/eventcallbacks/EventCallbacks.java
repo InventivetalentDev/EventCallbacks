@@ -55,6 +55,14 @@ public class EventCallbacks {
 		}, plugin);
 	}
 
+	/**
+	 * Listens for an event
+	 *
+	 * @param eventClazz Event class to listen for
+	 * @param priority   {@link EventPriority}
+	 * @param callback   {@link EventCallback}
+	 * @param <T>        event Type
+	 */
 	public <T extends Event> void listenFor(final Class<T> eventClazz, EventPriority priority, final EventCallback<T> callback) {
 		Set<EventCallback> set = eventMap.get(eventClazz);
 		if (set == null) { set = new HashSet<>(); }
@@ -79,10 +87,23 @@ public class EventCallbacks {
 		eventMap.put(eventClazz, set);
 	}
 
+	/**
+	 * Listens for an event
+	 *
+	 * @param eventClazz Event class to listen for
+	 * @param callback   {@link EventCallback}
+	 * @param <T>        event Type
+	 */
 	public <T extends Event> void listenFor(Class<T> eventClazz, final EventCallback<T> callback) {
 		listenFor(eventClazz, EventPriority.NORMAL, callback);
 	}
 
+	/**
+	 * Get a new {@link EventCallbacks} instance for the plugin
+	 *
+	 * @param plugin {@link Plugin}
+	 * @return a new EventCallbacks instance
+	 */
 	public static EventCallbacks of(Plugin plugin) {
 		return new EventCallbacks(plugin);
 	}
