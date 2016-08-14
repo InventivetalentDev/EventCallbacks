@@ -40,7 +40,7 @@ import java.util.*;
 public class EventCallbacks {
 
 	private final Plugin plugin;
-	private final Map<Class, Set<EventCallback>> eventMap = new HashMap<>();
+	private final Map<String, Set<EventCallback>> eventMap = new HashMap<>();
 
 	private EventCallbacks(@Nonnull final Plugin plugin) {
 		this.plugin = plugin;
@@ -64,27 +64,29 @@ public class EventCallbacks {
 	 * @param <T>        event Type
 	 */
 	public <T extends Event> void listenFor(final Class<T> eventClazz, EventPriority priority, final EventCallback<T> callback) {
-		Set<EventCallback> set = eventMap.get(eventClazz);
+		final String eventKey = eventClazz.getName() + "_" + priority.name();
+
+		Set<EventCallback> set = eventMap.get(eventKey);
 		if (set == null) { set = new HashSet<>(); }
 		set.add(callback);
 
-		if (!eventMap.containsKey(eventClazz)) {
+		if (!eventMap.containsKey(eventKey)) {
 			Bukkit.getPluginManager().registerEvent(eventClazz, new Listener() {
 			}, priority, new EventExecutor() {
 				@Override
 				public void execute(Listener listener, Event event) throws EventException {
-					Set<EventCallback> callbacks = eventMap.get(eventClazz);
+					Set<EventCallback> callbacks = eventMap.get(eventKey);
 					for (Iterator<EventCallback> iterator = callbacks.iterator(); iterator.hasNext(); ) {
 						//noinspection unchecked
 						if (iterator.next().call(event)) {
 							iterator.remove();
 						}
 					}
-					eventMap.put(eventClazz, callbacks);
+					eventMap.put(eventKey, callbacks);
 				}
 			}, this.plugin, true);
 		}
-		eventMap.put(eventClazz, set);
+		eventMap.put(eventKey, set);
 	}
 
 	/**
