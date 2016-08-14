@@ -40,7 +40,8 @@ import java.util.*;
 public class EventCallbacks {
 
 	private final Plugin plugin;
-	private final Map<String, Set<EventCallback>> eventMap = new HashMap<>();
+	private final Map<String, Set<EventCallback>> eventMap     = new HashMap<>();
+	private       int                             eventCounter = 0;
 
 	private EventCallbacks(@Nonnull final Plugin plugin) {
 		this.plugin = plugin;
@@ -64,7 +65,7 @@ public class EventCallbacks {
 	 * @param <T>        event Type
 	 */
 	public <T extends Event> void listenFor(final Class<T> eventClazz, EventPriority priority, final EventCallback<T> callback) {
-		final String eventKey = eventClazz.getName() + "_" + priority.name();
+		final String eventKey = eventClazz.getName() + "_" + priority.name() + "_" + (eventCounter++);
 
 		Set<EventCallback> set = eventMap.get(eventKey);
 		if (set == null) { set = new HashSet<>(); }
