@@ -75,7 +75,7 @@ public class EventCallbacks {
 			}, priority, new EventExecutor() {
 				@Override
 				public void execute(Listener listener, Event event) throws EventException {
-					Set<EventCallback> callbacks = eventMap.get(eventKey);
+					Set<EventCallback> callbacks = new HashSet<>(eventMap.get(eventKey));
 					for (Iterator<EventCallback> iterator = callbacks.iterator(); iterator.hasNext(); ) {
 						//noinspection unchecked
 						if (iterator.next().call(event)) {
