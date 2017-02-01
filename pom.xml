@@ -111,11 +111,6 @@
             <artifactId>craftbukkit</artifactId>
             <version>1.9-R0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.mcstats.bukkit</groupId>
-            <artifactId>metrics-lite</artifactId>
-            <version>R8-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <repositories>
@@ -142,10 +137,6 @@
         <repository>
             <id>techcable-repo</id>
             <url>http://repo.techcable.net/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>mcstats-repo</id>
-            <url>http://repo.mcstats.org/content/groups/public/</url>
         </repository>
     </repositories>
 </project>
