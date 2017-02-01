@@ -31,7 +31,6 @@ package org.inventivetalent.eventcallbacks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerEvent;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
 /**
@@ -49,14 +48,14 @@ public abstract class PlayerEventCallback<T extends PlayerEvent> implements Even
 	/**
 	 * @param uuid UUID of the player
 	 */
-	public PlayerEventCallback(@Nonnull UUID uuid) {
+	public PlayerEventCallback(UUID uuid) {
 		this.playerUUID = uuid;
 	}
 
 	/**
 	 * @param player Player to listen for
 	 */
-	public PlayerEventCallback(@Nonnull Player player) {
+	public PlayerEventCallback(Player player) {
 		this.playerUUID = player.getUniqueId();
 	}
 

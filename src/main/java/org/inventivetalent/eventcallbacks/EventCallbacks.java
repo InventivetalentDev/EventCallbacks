@@ -34,7 +34,6 @@ import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.Plugin;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 public class EventCallbacks {
@@ -43,7 +42,7 @@ public class EventCallbacks {
 	private final Map<String, Set<EventCallback>> eventMap     = new HashMap<>();
 	private       int                             eventCounter = 0;
 
-	private EventCallbacks(@Nonnull final Plugin plugin) {
+	private EventCallbacks(final Plugin plugin) {
 		this.plugin = plugin;
 
 		Bukkit.getPluginManager().registerEvents(new Listener() {
